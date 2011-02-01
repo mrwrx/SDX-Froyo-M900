@@ -1,0 +1,10 @@
+on boot
+#    setprop net.eth0.dns1 10.32.192.11
+#    setprop net.eth0.dns2 10.32.193.11
+    setprop ro.build.product SCH-R880
+    setprop ro.product.device SCH-R880
+    setprop ro.radio.noril yes
+
+service apollo-setup /system/etc/init.r880.sh
+    oneshot
+
