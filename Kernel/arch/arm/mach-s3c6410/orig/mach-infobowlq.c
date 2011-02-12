@@ -95,7 +95,7 @@ EXPORT_SYMBOL(sec_get_param_value);
 
 void infobowlq_init_gpio(void);
 
-//#define __FUEL_GAUGES_IC_MAX17043__
+#define __FUEL_GAUGES_IC_MAX17043__
 
 #define UCON S3C_UCON_DEFAULT
 #define ULCON S3C_LCON_CS8 | S3C_LCON_PNONE
