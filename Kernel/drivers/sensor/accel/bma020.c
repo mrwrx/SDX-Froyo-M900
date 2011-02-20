@@ -1,11 +1,8 @@
 
-#include <linux/module.h>
-#include <linux/kernel.h>
 #include "bma020.h"
+#include <linux/kernel.h>
 
-#ifdef CONFIG_TARGET_LOCALE_VZW
-extern unsigned int HWREV;
-#endif
+
 bma020_t *p_bma020;				/**< pointer to BMA020 device structure  */
 
 
@@ -13,10 +10,13 @@ int bma020_init(bma020_t *bma020)
 {
 	int comres=0;
 	unsigned char data;
+
 	p_bma020 = bma020;															/* assign bma020 ptr */
 	p_bma020->dev_addr = BMA020_I2C_ADDR;										/* preset SM380 I2C_addr */
-	comres += p_bma020->BMA020_BUS_READ_FUNC(p_bma020->dev_addr, CHIP_ID__REG, &data, 1);	/* read Chip Id */	
+	comres += p_bma020->BMA020_BUS_READ_FUNC(p_bma020->dev_addr, CHIP_ID__REG, &data, 1);	/* read Chip Id */
+	
 	p_bma020->chip_id = BMA020_GET_BITSLICE(data, CHIP_ID);			/* get bitslice */
+		
 	comres += p_bma020->BMA020_BUS_READ_FUNC(p_bma020->dev_addr, ML_VERSION__REG, &data, 1); /* read Version reg */
 	p_bma020->ml_version = BMA020_GET_BITSLICE(data, ML_VERSION);	/* get ML Version */
 	p_bma020->al_version = BMA020_GET_BITSLICE(data, AL_VERSION);	/* get AL Version */
@@ -196,6 +196,7 @@ int bma020_selftest(unsigned char st)
 {
 	int comres;
 	unsigned char data;
+	
 	comres = p_bma020->BMA020_BUS_READ_FUNC(p_bma020->dev_addr, SELF_TEST__REG, &data, 1);
 	data = BMA020_SET_BITSLICE(data, SELF_TEST, st);
 	comres += p_bma020->BMA020_BUS_WRITE_FUNC(p_bma020->dev_addr, SELF_TEST__REG, &data, 1);  
@@ -209,7 +210,7 @@ int bma020_set_range(char range)
 {			
    int comres = 0;
    unsigned char data;
-	gprintk("start \n");                
+
    if (p_bma020==0)
 	    return E_BMA020_NULL_PTR;
 
@@ -229,7 +230,7 @@ int bma020_get_range(unsigned char *range)
 {
 	int comres = 0;
 	
-	gprintk("start \n");               
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 	
@@ -246,7 +247,7 @@ int bma020_set_mode(unsigned char mode) {
 	
 	int comres=0;
 	unsigned char data1, data2;
-	gprintk("start \n");                
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 
@@ -269,7 +270,6 @@ int bma020_set_mode(unsigned char mode) {
 
 unsigned char bma020_get_mode(void) 
 {
-	gprintk("start \n");               
     if (p_bma020==0)
     	return E_BMA020_NULL_PTR;	
 	
@@ -281,7 +281,7 @@ int bma020_set_bandwidth(char bw)
 {
 	int comres = 0;
 	unsigned char data;
-	gprintk("start \n");              
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 
@@ -301,7 +301,7 @@ int bma020_set_bandwidth(char bw)
 int bma020_get_bandwidth(unsigned char *bw) 
 {
 	int comres = 1;
-	gprintk("start \n");             
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 
@@ -675,7 +675,7 @@ int bma020_read_accel_z(short *a_z)
 {
 	int comres;
 	unsigned char data[2];	
-	
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 
@@ -708,13 +708,9 @@ int bma020_read_accel_xyz(bma020acc_t * acc)
 {
 	int comres;
 	unsigned char data[6];
-	int reg;
-	gprintk("start \n");                
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
-	
-	for(reg=0;reg<6;reg++)
-	data[reg]=0;                     
 	
 	comres = p_bma020->BMA020_BUS_READ_FUNC(p_bma020->dev_addr, ACC_X_LSB__REG, &data[0],6);
 	
@@ -730,13 +726,10 @@ int bma020_read_accel_xyz(bma020acc_t * acc)
 	acc->z = acc->z << (sizeof(short)*8-(ACC_Z_LSB__LEN + ACC_Z_MSB__LEN));
 	acc->z = acc->z >> (sizeof(short)*8-(ACC_Z_LSB__LEN + ACC_Z_MSB__LEN));
 
-#ifdef 	CONFIG_TARGET_LOCALE_VZW
-	if (HWREV == 0x9)
-	  acc->x = (-1)*(acc->x);
-#endif	
-	//acc->x = (-1)*(acc->x);  
-	acc->y = (-1)*(acc->y);  
-	acc->z = (-1)*(acc->z);
+	//acc->x = (-1)*(acc->x);
+	acc->y = (-1)*(acc->y);
+	//acc->z = (-1)*(acc->z);
+
 	return comres;
 }
 
@@ -890,6 +883,7 @@ int bma020_pause(int msec)
 int bma020_read_reg(unsigned char addr, unsigned char *data, unsigned char len)
 {
 	int comres;
+	
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 
@@ -902,6 +896,7 @@ int bma020_read_reg(unsigned char addr, unsigned char *data, unsigned char len)
 int bma020_write_reg(unsigned char addr, unsigned char *data, unsigned char len) 
 {
 	int comres;
+
 	if (p_bma020==0)
 		return E_BMA020_NULL_PTR;
 

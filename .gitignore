@@ -1,0 +1,8 @@
+*.cmd
+*.o
+*.d
+*.S
+*.order
+Kernel/System.map
+*.ko
+

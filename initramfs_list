@@ -5,6 +5,7 @@ file /sbin/Superuser.apk /home/byung/android/acclaim/initramfs/sbin/Superuser.ap
 file /sbin/sdx.sh /home/byung/android/acclaim/initramfs/sbin/sdx.sh 0775 0 0
 file /sbin/adbd /home/byung/android/acclaim/initramfs/sbin/adbd 0775 0 0
 file /sbin/su /home/byung/android/acclaim/initramfs/sbin/su 0664 0 0
+file /sbin/flash_image /home/byung/android/acclaim/initramfs/sbin/flash_image 0775 0 0
 dir /bin 0775 0 0
 file /init.goldfish.rc /home/byung/android/acclaim/initramfs/init.goldfish.rc 0664 0 0
 dir /sys 0775 0 0

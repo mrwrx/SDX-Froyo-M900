@@ -3,14 +3,6 @@
 
 #include <linux/earlysuspend.h>
 
-/*********** for debug **********************************************************/
-#if 0 
-#define gprintk(fmt, x... ) printk( "[BMA020] %s(%d): " fmt, __FUNCTION__ ,__LINE__, ## x)
-#else
-#define gprintk(x...) do { } while (0)
-#endif 
-/*******************************************************************************/
-
 /* don't use SPI interface */
 #define BMA020_SPI_RD_MASK 0x80   /* for spi read transactions on SPI the MSB has to be set */
 

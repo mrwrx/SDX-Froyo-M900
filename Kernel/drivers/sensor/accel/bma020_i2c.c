@@ -5,29 +5,92 @@
 #include <linux/sched.h>
 #include <linux/workqueue.h>
 
-//#include <asm/hardware.h>
-//#include <asm/arch/gpio.h>
-//add by inter.park
 #include <mach/hardware.h>
 #include <linux/gpio.h>
 
 #include <linux/irq.h>
 #include <linux/i2c.h>
-#include <linux/kernel.h>
+
 #include "bma020_i2c.h"
 
+static int __devinit i2c_acc_bma020_probe(struct i2c_client *client, const struct i2c_device_id *id);
+static int __devexit i2c_acc_bma020_remove(struct i2c_client *client);
+static int i2c_acc_bma020_detect(struct i2c_client *client, int kind, struct i2c_board_info *info);
+
+
+#define	ACC_SENSOR_ADDRESS		0x38
 
 #define I2C_M_WR				0x00
 #define I2C_DF_NOTIFY			0x01
 
+struct i2c_device_id i2c_acc_bma020_idtable[] = {
+    { "kr3dm", 0 },
+    { }
+};
 
-static struct i2c_client *g_client;	
+
+#if 0
+static struct i2c_client *g_client;
+static unsigned short ignore[] = { I2C_CLIENT_END };
+
+static unsigned short normal_addr[] = {
+	ACC_SENSOR_ADDRESS,
+	I2C_CLIENT_END
+};
+#endif
+
+static struct i2c_client *g_client;
+
+static unsigned short ignore[] = { I2C_CLIENT_END };
+static unsigned short normal_addr[] = { I2C_CLIENT_END };
+static unsigned short probe_addr[] = { 5, ACC_SENSOR_ADDRESS, I2C_CLIENT_END };
+
+static struct i2c_client_address_data addr_data = {
+	.normal_i2c		= normal_addr,
+	.probe			= probe_addr,
+	.ignore			= ignore,
+};
+
+struct i2c_driver acc_bma020_i2c_driver =
+{
+	.driver = {
+		.name = "kr3dm",
+	},
+	.class  =       I2C_CLASS_HWMON,
+	.probe  =       i2c_acc_bma020_probe,
+	.remove =       __devexit_p(i2c_acc_bma020_remove),
+	.detect =       i2c_acc_bma020_detect,
+	.id_table =     i2c_acc_bma020_idtable,
+	.address_data = &addr_data
+};
+
+MODULE_DEVICE_TABLE(i2c, i2c_acc_bma020_idtable);
+
+int i2c_acc_bma020_init(void)
+{
+	int ret;
+	gprintk("\n");
+
+	if ( (ret = i2c_add_driver(&acc_bma020_i2c_driver)) ) 
+	{
+		printk("Driver registration failed, module not inserted.\n");
+		return ret;
+	}
+	return 0;
+}
+
+void i2c_acc_bma020_exit(void)
+{
+        gprintk("\n");
+	i2c_del_driver(&acc_bma020_i2c_driver); 
+}
+
 
 char i2c_acc_bma020_read(u8 reg, u8 *val, unsigned int len )
 {
 	int 	 err;
 	struct 	 i2c_msg msg[1];
-		
+	
 	unsigned char data[1];
 	if( (g_client == NULL) || (!g_client->adapter) )
 	{
@@ -85,54 +148,39 @@ char i2c_acc_bma020_write( u8 reg, u8 *val )
 	return err;
 }
 
-static int __devinit bma020_probe(struct i2c_client *client,
-			const struct i2c_device_id *id)
+static int i2c_acc_bma020_detect(struct i2c_client *client, int kind, struct i2c_board_info *info)
 {
-        printk("%s called \n",__func__);
-		g_client = client;
+        gprintk("\n");
+        strlcpy(info->type, "kr3dm", I2C_NAME_SIZE);
         return 0;
 }
 
-static int __devexit bma020_remove(struct i2c_client *client)
-{	
-	g_client = NULL;
-	return 0;
-}
-
-static const struct i2c_device_id bma020_ids[] = {	
-	{ "bma020", 0 },
-	{ }
-};
-
-MODULE_DEVICE_TABLE(i2c, bma020_ids);
-
-struct i2c_driver acc_bma020_i2c_driver =
+static int __devinit i2c_acc_bma020_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
-	.driver	= {
-		.name	= "bma020",
-	},
-	.probe		= bma020_probe,
-	.remove		= __devexit_p(bma020_remove),
-	.id_table	= bma020_ids,
+	int err = 0;
+        gprintk("\n");
 
-};
-
-int i2c_acc_bma020_init(void)
-{
-	int ret;
-        printk("%s called \n",__func__);
-	if ( (ret = i2c_add_driver(&acc_bma020_i2c_driver)) ) 
-	{
-		printk("Driver registration failed, module not inserted.\n");
-		return ret;
+	if ( !i2c_check_functionality(client->adapter,I2C_FUNC_SMBUS_BYTE_DATA) ) {
+		printk(KERN_INFO "byte op is not permited.\n");
+		return -1;
 	}
 
+	client->driver = &acc_bma020_i2c_driver;
+
+
+	g_client = client;
+
+
 	return 0;
 }
 
-void i2c_acc_bma020_exit(void)
+static int __devexit i2c_acc_bma020_remove(struct i2c_client *client)
 {
-	printk("[BMA020] i2c_exit\n");
-	i2c_del_driver(&acc_bma020_i2c_driver); 
+	int err;
+
+        gprintk("\n");
+
+	g_client = NULL;
+	return 0;
 }
 
