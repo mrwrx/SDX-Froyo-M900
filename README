@@ -1,1 +1,30 @@
-1. Make sure you change CROSS_COMPILE in Kernel/Makefile
+CHANGE LOG
+
+Alpha v1.0 (included in the original ROM)
+   - Initial release.
+Beta v1.1
+   - fixed stability/lockup issue caused by incompatible code in the SD Host section
+Beta v1.2
+   - Implemented Numus' battery code.  (fixes battery issue)
+   - Current Kernel version can be tracked from About menu.
+Beta v1.2.1
+   - Another attempt to fix the battery issue.  (Changed machine variables/GPIO settings/etc)
+   - As a result of this change, proximity sensor works.
+Beta v1.3
+   - Camera orientation and auto-focus have been fixed.
+   - Light sensor works
+   - Changed battery code back to Moment 2.1 stock code.
+Beta v1.3.1
+   - Fixed dimming issue (need testing)
+   - Branch Prediction turnd on
+Beta v1.4
+   - Fixed phone suspend/sleep issue
+   - Reinstated Numus' battery code
+v2.0 RC1
+   - ALL sensors are FIXED!  - Thanks to DavidE for writing the driver.
+   - EXT2/3/4 support added. (untested)  - Thanks to Littlejth for providing the init.rc changes.
+   - CIFS added (untested)
+   - LED back light for the touch keys (HOME/MENU/BACK) are turned off completely for now.  My goal is to dim it to comfortable level.
+v2.0.1 RC1
+   - Fixed App2sd issue
+
