@@ -16,7 +16,7 @@ loglevel 3
     export ASEC_MOUNTPOINT /mnt/asec
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar
 
-setprop ro.build.display.id "SDX Froyo M900 v2.0_RC1"
+setprop ro.build.display.id "SDX Froyo M900 v2.0.1 RC1"
 
 # Backward compatibility
     symlink /system/etc /etc
