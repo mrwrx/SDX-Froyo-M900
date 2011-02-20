@@ -1,29 +1,29 @@
 dir /sbin 0775 0 0
 dir /mnt 0775 0 0
-file /sbin/busybox /home/byung/android/acclaim/initramfs/sbin/busybox 0775 0 0
-file /sbin/Superuser.apk /home/byung/android/acclaim/initramfs/sbin/Superuser.apk 0664 0 0
-file /sbin/sdx.sh /home/byung/android/acclaim/initramfs/sbin/sdx.sh 0775 0 0
-file /sbin/adbd /home/byung/android/acclaim/initramfs/sbin/adbd 0775 0 0
-file /sbin/su /home/byung/android/acclaim/initramfs/sbin/su 0664 0 0
-file /sbin/flash_image /home/byung/android/acclaim/initramfs/sbin/flash_image 0775 0 0
+file /sbin/busybox ../initramfs/sbin/busybox 0775 0 0
+file /sbin/Superuser.apk ../initramfs/sbin/Superuser.apk 0664 0 0
+file /sbin/sdx.sh ../initramfs/sbin/sdx.sh 0775 0 0
+file /sbin/adbd ../initramfs/sbin/adbd 0775 0 0
+file /sbin/su ../initramfs/sbin/su 0664 0 0
+file /sbin/flash_image ../initramfs/sbin/flash_image 0775 0 0
 dir /bin 0775 0 0
-file /init.goldfish.rc /home/byung/android/acclaim/initramfs/init.goldfish.rc 0664 0 0
+file /init.goldfish.rc ../initramfs/init.goldfish.rc 0664 0 0
 dir /sys 0775 0 0
 dir /proc 0775 0 0
-file /init /home/byung/android/acclaim/initramfs/init 0775 0 0
+file /init ../initramfs/init 0775 0 0
 dir /lib 0775 0 0
 dir /lib/modules 0775 0 0
-file /lib/modules/xsr_debug.ko /home/byung/android/acclaim/initramfs/lib/modules/xsr_debug.ko 0664 0 0
-file /lib/modules/dhd.ko /home/byung/android/acclaim/initramfs/lib/modules/dhd.ko 0664 0 0
-file /lib/modules/vibrator.ko /home/byung/android/acclaim/initramfs/lib/modules/vibrator.ko 0664 0 0
-file /lib/modules/crc32.ko /home/byung/android/acclaim/initramfs/lib/modules/crc32.ko 0664 0 0
-file /lib/modules/rfs.ko /home/byung/android/acclaim/initramfs/lib/modules/rfs.ko 0664 0 0
-file /lib/modules/param.ko /home/byung/android/acclaim/initramfs/lib/modules/param.ko 0664 0 0
-file /lib/modules/dpram.ko /home/byung/android/acclaim/initramfs/lib/modules/dpram.ko 0664 0 0
-file /lib/modules/xsr_stl.ko /home/byung/android/acclaim/initramfs/lib/modules/xsr_stl.ko 0664 0 0
-file /lib/modules/dpram_recovery.ko /home/byung/android/acclaim/initramfs/lib/modules/dpram_recovery.ko 0664 0 0
-file /lib/modules/xsr.ko /home/byung/android/acclaim/initramfs/lib/modules/xsr.ko 0664 0 0
-file /init.rc /home/byung/android/acclaim/initramfs/init.rc 0664 0 0
+file /lib/modules/xsr_debug.ko ../initramfs/lib/modules/xsr_debug.ko 0664 0 0
+file /lib/modules/dhd.ko ../initramfs/lib/modules/dhd.ko 0664 0 0
+file /lib/modules/vibrator.ko ../initramfs/lib/modules/vibrator.ko 0664 0 0
+file /lib/modules/crc32.ko ../initramfs/lib/modules/crc32.ko 0664 0 0
+file /lib/modules/rfs.ko ../initramfs/lib/modules/rfs.ko 0664 0 0
+file /lib/modules/param.ko ../initramfs/lib/modules/param.ko 0664 0 0
+file /lib/modules/dpram.ko ../initramfs/lib/modules/dpram.ko 0664 0 0
+file /lib/modules/xsr_stl.ko ../initramfs/lib/modules/xsr_stl.ko 0664 0 0
+file /lib/modules/dpram_recovery.ko ../initramfs/lib/modules/dpram_recovery.ko 0664 0 0
+file /lib/modules/xsr.ko ../initramfs/lib/modules/xsr.ko 0664 0 0
+file /init.rc ../initramfs/init.rc 0664 0 0
 dir /dev 0775 0 0
-file /default.prop /home/byung/android/acclaim/initramfs/default.prop 0664 0 0
-file /init.SCH-R880.rc /home/byung/android/acclaim/initramfs/init.SCH-R880.rc 0664 0 0
+file /default.prop ../initramfs/default.prop 0664 0 0
+file /init.SCH-R880.rc ../initramfs/init.SCH-R880.rc 0664 0 0
