@@ -23,6 +23,13 @@ file /lib/modules/dpram.ko ../initramfs/lib/modules/dpram.ko 0664 0 0
 file /lib/modules/xsr_stl.ko ../initramfs/lib/modules/xsr_stl.ko 0664 0 0
 file /lib/modules/dpram_recovery.ko ../initramfs/lib/modules/dpram_recovery.ko 0664 0 0
 file /lib/modules/xsr.ko ../initramfs/lib/modules/xsr.ko 0664 0 0
+file /lib/modules/jbd.ko ../initramfs/lib/modules/jbd.ko 0664 0 0
+file /lib/modules/jbd2.ko ../initramfs/lib/modules/jbd2.ko 0664 0 0
+file /lib/modules/mbcache.ko ../initramfs/lib/modules/mbcache.ko 0664 0 0
+file /lib/modules/ext2.ko ../initramfs/lib/modules/ext2.ko 0664 0 0
+file /lib/modules/ext3.ko ../initramfs/lib/modules/ext3.ko 0664 0 0
+file /lib/modules/ext4.ko ../initramfs/lib/modules/ext4.ko 0664 0 0
+file /lib/modules/cifs.ko ../initramfs/lib/modules/cifs.ko 0664 0 0
 file /init.rc ../initramfs/init.rc 0664 0 0
 dir /dev 0775 0 0
 file /default.prop ../initramfs/default.prop 0664 0 0

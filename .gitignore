@@ -4,5 +4,3 @@
 *.S
 *.order
 Kernel/System.map
-*.ko
-
