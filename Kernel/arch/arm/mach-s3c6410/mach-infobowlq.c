@@ -280,12 +280,10 @@ static struct gpio_led sec_keyled_list[] = {
 		.name = "keyboard-backlight",
 		.gpio = GPIO_MAIN_KEY_LED_EN,
 	},
-/* mrwrx - turn off annoying keypad lights for now
 	{ 
 		.name = "button-backlight",
 		.gpio = GPIO_SUB_KEY_LED_EN,
 	},
-*/
 };
 
 static struct gpio_led_platform_data sec_keyled_data = {
