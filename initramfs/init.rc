@@ -99,7 +99,7 @@ setprop ro.build.display.id "SDX Froyo M900 v2.0.1 RC1"
     mount rfs /dev/block/stl5 /system ro nosuid nodev xattr,check=no
     mount ext2 /dev/block/stl5 /system ro nosuid nodev noatime nodiratime
     mount ext3 /dev/block/stl5 /system ro nosuid nodev noatime nodiratime
-    mount ext4 /dev/block/stl5 /system nosuid nodev noatime nodiratime data=ordered
+    mount ext4 /dev/block/stl5 /system ro nosuid nodev noatime nodiratime data=ordered
 
     # mount rfs /dev/stl5 /system ro xattr,check=no
 
